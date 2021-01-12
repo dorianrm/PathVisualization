@@ -13,6 +13,6 @@ class Cube(object):
 
 
     def draw(self, surface):
-        dis_x, dis_y = ST.WIDTH // ST.COLS, ST.HEIGHT // ST.ROWS
+        dis_x, dis_y = ST.WIDTH // ST.COLS, ST.GRID_HEIGHT // ST.ROWS
         pygame.draw.rect(surface, self.color, (self.col*dis_x, self.row*dis_y, dis_x, dis_y))
         # rect(left_x, left_y, dim_x, dim_y)

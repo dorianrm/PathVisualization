@@ -14,17 +14,17 @@ def draw_grid(surface):
     x, y = 0, 0
     for i in range(ST.COLS):
         x = x + sizeBtwn
-        pygame.draw.line(surface, 'Black', (x, 0), (x, ST.HEIGHT))  # col lines
+        pygame.draw.line(surface, 'Black', (x, 0), (x, ST.GRID_HEIGHT))  # col lines
         
-    sizeBtwn = ST.HEIGHT // ST.ROWS
+    sizeBtwn = ST.GRID_HEIGHT // ST.ROWS
     for i in range(ST.ROWS):
         y = y + sizeBtwn
         pygame.draw.line(surface, 'Black', (0, y), (ST.WIDTH, y))  # row lines
 
 def draw_window(surface, grid):
     surface.fill(ST.GRID_COL)
-    draw_grid(surface)
     draw_cubes(surface, grid)
+    draw_grid(surface)
     pygame.display.update()
 
 def exit_check():
