@@ -27,38 +27,56 @@ def draw_window(surface, grid):
     draw_grid(surface)
     pygame.display.update()
 
-def event_check(grid, start_cube, end_cube):
+def event_check(grid):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+        
+        keys = pygame.key.get_pressed()
+        for key in keys:
+            if keys[pygame.K_q]:
+                pygame.quit()
 
         if pygame.mouse.get_pressed()[0]:
             mouse_pos = pygame.mouse.get_pos()
             row, col = get_mouse_pos(mouse_pos)
             clicked_cube = grid[row][col]
-            if start_cube == None:
-                print('NONE')
-                start_cube = clicked_cube
-                start_cube.set_start()
+            if clicked_cube == ST.END_CUBE:
+                if ST.START_CUBE != None:
+                    ST.START_CUBE.reset()
+                if ST.END_CUBE != None:
+                    ST.END_CUBE = None
+                ST.START_CUBE = clicked_cube
+                ST.START_CUBE.set_start()
             else: # if start_cube != None:
-                print('NEW START')
-                start_cube.reset()
-                start_cube = clicked_cube
-                start_cube.set_start()
-            print('START CUBE (ROW,COL): ', start_cube.row, start_cube.col)
-            print('START CUBE COLOR: ', start_cube.color)
+                if ST.START_CUBE != None:
+                    ST.START_CUBE.reset()
+                ST.START_CUBE = clicked_cube
+                ST.START_CUBE.set_start()
 
         if pygame.mouse.get_pressed()[2]:
             mouse_pos = pygame.mouse.get_pos()
             row, col = get_mouse_pos(mouse_pos)
-            clicked_cube = grid[row][col].set_end()
-            
+            clicked_cube = grid[row][col]
+            if clicked_cube == ST.START_CUBE:
+                if ST.END_CUBE != None:
+                    ST.END_CUBE.reset()
+                if ST.START_CUBE != None:
+                    ST.START_CUBE = None
+                ST.END_CUBE = clicked_cube
+                ST.END_CUBE.set_end()
+            else: # if start_cube != None:
+                if ST.END_CUBE != None:
+                    ST.END_CUBE.reset()
+                ST.END_CUBE = clicked_cube
+                ST.END_CUBE.set_end()
 
-        keys = pygame.key.get_pressed()
-        for key in keys:
-            if keys[pygame.K_q]:
-                pygame.quit()
-    return start_cube, end_cube
+
+    
+    if ST.START_CUBE != None:
+        print('START CUBE (ROW,COL): ', ST.START_CUBE.row, ST.START_CUBE.col)
+    if ST.END_CUBE != None:
+        print('END CUBE (ROW,COL): ', ST.END_CUBE .row, ST.END_CUBE .col)
 
 def get_mouse_pos(pos):
     x,y = pos
@@ -84,11 +102,9 @@ def main():
     window = pygame.display.set_mode((ST.WIDTH, ST.HEIGHT))
     grid = init_grid() #Entire grid and cubes stored in 'grid' var
     # test_grid(grid)
-    start_cube = None # cube objects
-    end_cube = None
 
     while True:
-        start_cube, end_cube = event_check(grid, start_cube, end_cube)
+        event_check(grid)
         draw_window(window, grid)
 
 main()
