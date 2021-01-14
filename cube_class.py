@@ -23,5 +23,8 @@ class Cube(object):
     def set_end(self):
         self.color = ST.END_COLOR
 
+    def set_wall(self):
+        self.color = ST.WALL_COLOR
+
     def reset(self):
         self.color = ST.DEFAULT_COLOR

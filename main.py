@@ -41,42 +41,69 @@ def event_check(grid):
             mouse_pos = pygame.mouse.get_pos()
             row, col = get_mouse_pos(mouse_pos)
             clicked_cube = grid[row][col]
-            if clicked_cube == ST.END_CUBE:
-                if ST.START_CUBE != None:
-                    ST.START_CUBE.reset()
-                if ST.END_CUBE != None:
-                    ST.END_CUBE = None
+            # if clicked_cube == ST.START_CUBE:
+            #     ST.START_CUBE.reset()
+            #     ST.START_CUBE = None
+            # elif clicked_cube == ST.END_CUBE:
+            #     ST.END_CUBE.reset()
+            #     ST.END_CUBE = None
+            if ST.START_CUBE == None and clicked_cube != ST.END_CUBE:
                 ST.START_CUBE = clicked_cube
                 ST.START_CUBE.set_start()
-            else: # if start_cube != None:
-                if ST.START_CUBE != None:
-                    ST.START_CUBE.reset()
-                ST.START_CUBE = clicked_cube
-                ST.START_CUBE.set_start()
+            elif ST.END_CUBE == None and clicked_cube != ST.START_CUBE:
+                ST.END_CUBE = clicked_cube
+                ST.END_CUBE.set_end()
+            elif clicked_cube != ST.START_CUBE and clicked_cube != ST.END_CUBE:
+                clicked_cube.set_wall()
+            # if clicked_cube == ST.END_CUBE:
+            #     if ST.START_CUBE != None:
+            #         ST.START_CUBE.reset()
+            #     if ST.END_CUBE != None:
+            #         ST.END_CUBE = None
+            #     ST.START_CUBE = clicked_cube
+            #     ST.START_CUBE.set_start()
+            # else: # if start_cube != None:
+            #     if ST.START_CUBE != None:
+            #         ST.START_CUBE.reset()
+            #     ST.START_CUBE = clicked_cube
+            #     ST.START_CUBE.set_start()
 
         if pygame.mouse.get_pressed()[2]:
             mouse_pos = pygame.mouse.get_pos()
             row, col = get_mouse_pos(mouse_pos)
             clicked_cube = grid[row][col]
             if clicked_cube == ST.START_CUBE:
-                if ST.END_CUBE != None:
-                    ST.END_CUBE.reset()
-                if ST.START_CUBE != None:
-                    ST.START_CUBE = None
-                ST.END_CUBE = clicked_cube
-                ST.END_CUBE.set_end()
-            else: # if start_cube != None:
-                if ST.END_CUBE != None:
-                    ST.END_CUBE.reset()
-                ST.END_CUBE = clicked_cube
-                ST.END_CUBE.set_end()
+                ST.START_CUBE.reset()
+                ST.START_CUBE = None
+            elif clicked_cube == ST.END_CUBE:
+                ST.END_CUBE.reset()
+                ST.END_CUBE = None
+            else:
+                clicked_cube.reset()
+            # if clicked_cube == ST.START_CUBE:
+            #     if ST.END_CUBE != None:
+            #         ST.END_CUBE.reset()
+            #     if ST.START_CUBE != None:
+            #         ST.START_CUBE = None
+            #     ST.END_CUBE = clicked_cube
+            #     ST.END_CUBE.set_end()
+            # else: # if start_cube != None:
+            #     if ST.END_CUBE != None:
+            #         ST.END_CUBE.reset()
+            #     ST.END_CUBE = clicked_cube
+            #     ST.END_CUBE.set_end()
 
 
     
     if ST.START_CUBE != None:
         print('START CUBE (ROW,COL): ', ST.START_CUBE.row, ST.START_CUBE.col)
+    else:
+        print('START CUBE ------')
     if ST.END_CUBE != None:
         print('END CUBE (ROW,COL): ', ST.END_CUBE .row, ST.END_CUBE .col)
+    else:
+        print('END CUBE ------')
+
 
 def get_mouse_pos(pos):
     x,y = pos

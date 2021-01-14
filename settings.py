@@ -13,9 +13,10 @@ def init():
     CUBE_WIDTH = WIDTH // COLS
 
     # Cube settings
-    global START_CUBE, END_CUBE, DEFAULT_COLOR, START_COLOR, END_COLOR
+    global START_CUBE, END_CUBE, DEFAULT_COLOR, START_COLOR, END_COLOR, WALL_COLOR
     START_CUBE = None
     END_CUBE = None
     DEFAULT_COLOR = 'White'
     START_COLOR = 'Blue'
     END_COLOR = 'Yellow'
+    WALL_COLOR = 'Black'
