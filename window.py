@@ -4,7 +4,6 @@ import settings as ST
 import algorithms as alg
 from cube_class import Cube
 
-
 def init_grid():
     grid = []
     for i in range(ST.ROWS):
@@ -34,3 +33,4 @@ def draw_window(surface, grid):
     draw_cubes(surface, grid)
     draw_grid(surface)
     pygame.display.update()
+

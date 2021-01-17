@@ -5,6 +5,11 @@ import window as win
 import algorithms as alg
 from cube_class import Cube
 
+'''
+Notes:
+BFS, A-star, Dijkstra, Kruskal
+'''
+
 
 def event_check(surface, grid):
     path_found = False
@@ -20,6 +25,12 @@ def event_check(surface, grid):
             print('PRESSED SPACE')
             alg.BFS(grid, surface) # run algorithm
             path_found = True
+        
+        if keys[pygame.K_r]:
+            print('RESET')
+            grid = win.init_grid()
+            ST.START_CUBE = None
+            ST.END_CUBE = None
 
         if pygame.mouse.get_pressed()[0]:
             mouse_pos = pygame.mouse.get_pos()
@@ -34,6 +45,13 @@ def event_check(surface, grid):
                 ST.END_CUBE.set_end()
             elif clicked_cube != ST.START_CUBE and clicked_cube != ST.END_CUBE:
                 clicked_cube.set_wall()
+                # print("clicked cube: +++++++++")
+                # print(clicked_cube.color)
+                # print(clicked_cube.wall)
+                # print('manual cube ----------')
+                # print(grid[row][col].color)
+                # print(grid[row][col].wall)
+                # print('end ###########')
 
 
         if pygame.mouse.get_pressed()[2]:
@@ -48,7 +66,7 @@ def event_check(surface, grid):
                 ST.END_CUBE = None
             else:
                 clicked_cube.reset()
-
+    return grid
     
     # if ST.START_CUBE != None:
     #     print('START CUBE (ROW,COL): ', ST.START_CUBE.row, ST.START_CUBE.col)
@@ -81,7 +99,7 @@ def run():
     while True:
         win.draw_window(window, grid)
         # print('before event check')
-        event_check(window, grid)
+        grid = event_check(window, grid)
         # print('after event check')
 
 run()

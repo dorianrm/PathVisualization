@@ -18,7 +18,7 @@ def BFS_alg(grid, surface):
         for nei_pos in curr_cube.get_neighbors():
             r,c = nei_pos[0], nei_pos[1]
             nei_cube = grid[r][c]
-            if nei_cube not in visited:
+            if nei_cube not in visited and not nei_cube.wall:
                 if nei_cube != ST.END_CUBE:
                     nei_cube.set_frontier()
                 prev_grid[r][c] = curr_cube
@@ -52,8 +52,11 @@ def BFS(grid, surface):
 
     # Color path
     print('RIGHT BEFORE PATH')
-    for cube in path:
+    print(len(path))
+    for cube in path[::-1][:-1]:
+        # if cube != ST.END_CUBE:
         cube.set_path()
+        win.draw_window(surface, grid)
     # for cube in path[::-2]:
     #     cube.set_path()
     

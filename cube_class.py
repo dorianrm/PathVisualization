@@ -2,11 +2,12 @@ import pygame
 import settings as ST
 
 class Cube(object):
-    def __init__(self, row, col, cost=0):
+    def __init__(self, row, col, cost=0, wall=False):
         self.row = row
         self.col = col
         self.color = ST.DEFAULT_COLOR
         self.cost = 0
+        self.wall = False
 
     def set_pos(self, pos):
         self.pos = pos
@@ -26,6 +27,7 @@ class Cube(object):
 
     def set_wall(self):
         self.color = ST.WALL_COLOR
+        self.wall = True
     
     def set_visited(self):
         self.color = ST.VISITED_COLOR
@@ -38,6 +40,7 @@ class Cube(object):
 
     def reset(self):
         self.color = ST.DEFAULT_COLOR
+        self.wall = False
 
     def get_neighbors(self):
         neighbors = []
