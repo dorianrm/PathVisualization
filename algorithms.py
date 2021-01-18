@@ -6,7 +6,6 @@ from cube_class import Cube
 
 def BFS_alg(grid, surface):
     visited = set()
-    global prev_grid
     queue = deque([ST.START_CUBE])
     while queue:
         curr_cube = queue.popleft()
@@ -21,30 +20,22 @@ def BFS_alg(grid, surface):
             if nei_cube not in visited and not nei_cube.wall:
                 if nei_cube != ST.END_CUBE:
                     nei_cube.set_frontier()
-                prev_grid[r][c] = curr_cube
+                nei_cube.parent = curr_cube
                 queue.append(nei_cube)
-                # update goes here
             win.draw_window(surface, grid)
     return False
     
 
 def BFS(grid, surface):
     # init prev cube grid
-    global prev_grid
-    prev_grid = []
-    for i in range(ST.ROWS):
-        prev_grid.append([None for j in range(ST.COLS)])
-    
     # BFS alg
     if not BFS_alg(grid, surface):
         print('PATH NOT FOUND')
         return
     path = []
     curr_edge = ST.END_CUBE
-    path.append(curr_edge)
-    # Construct shortest path
-    while prev_grid[curr_edge.row][curr_edge.col] != None:
-        prev_edge = prev_grid[curr_edge.row][curr_edge.col]
+    while curr_edge.parent:
+        prev_edge = curr_edge.parent
         if prev_edge == ST.START_CUBE:
             break
         path.append(prev_edge)
@@ -53,10 +44,7 @@ def BFS(grid, surface):
     # Color path
     print('RIGHT BEFORE PATH')
     print(len(path))
-    for cube in path[::-1][:-1]:
-        # if cube != ST.END_CUBE:
+    for cube in path[::-1]:
         cube.set_path()
         win.draw_window(surface, grid)
-    # for cube in path[::-2]:
-    #     cube.set_path()
     

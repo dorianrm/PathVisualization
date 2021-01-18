@@ -14,7 +14,6 @@ def draw_cubes(surface, grid):
     for i in range(ST.ROWS):
         for j in range(ST.COLS):
             grid[i][j].draw(surface)
-            
 
 def draw_grid(surface):
     sizeBtwn = ST.WIDTH // ST.COLS
