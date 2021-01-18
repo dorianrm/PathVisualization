@@ -10,7 +10,6 @@ Notes:
 BFS, A-star, Dijkstra, Kruskal
 '''
 
-
 def event_check(surface, grid):
     path_found = False
     for event in pygame.event.get():
@@ -45,14 +44,6 @@ def event_check(surface, grid):
                 ST.END_CUBE.set_end()
             elif clicked_cube != ST.START_CUBE and clicked_cube != ST.END_CUBE:
                 clicked_cube.set_wall()
-                # print("clicked cube: +++++++++")
-                # print(clicked_cube.color)
-                # print(clicked_cube.wall)
-                # print('manual cube ----------')
-                # print(grid[row][col].color)
-                # print(grid[row][col].wall)
-                # print('end ###########')
-
 
         if pygame.mouse.get_pressed()[2]:
             mouse_pos = pygame.mouse.get_pos()
