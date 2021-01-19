@@ -82,7 +82,7 @@ def test_grid(grid):
             print('ROW: ', grid[i][j].row)
             print('COL: ', grid[i][j].col)
 
-def run():
+def main():
     ST.init()
     window = pygame.display.set_mode((ST.WIDTH, ST.HEIGHT))
     grid = win.init_grid() #Entire grid and cubes stored in 'grid' var
@@ -93,7 +93,7 @@ def run():
         grid = event_check(window, grid)
         # print('after event check')
 
-run()
+main()
 
 # root = Tk()
 # the_label = Label(root, text="This is easy")

@@ -1,7 +1,5 @@
 import pygame
-from tkinter import *
 import settings as ST
-import algorithms as alg
 from cube_class import Cube
 
 def init_grid():
