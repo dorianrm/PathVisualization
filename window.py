@@ -8,6 +8,10 @@ def init_grid():
         grid.append([Cube(i,j) for j in range(ST.COLS)])
     return grid
 
+def draw_buttons(surface):
+    run_button = pygame.Rect(ST.RUN_X, ST.RUN_Y, ST.RUN_WIDTH, ST.RUN_HEIGHT)
+    pygame.draw.rect(surface, ST.RUN_COLOR, run_button)
+
 def draw_cubes(surface, grid):
     for i in range(ST.ROWS):
         for j in range(ST.COLS):
@@ -29,5 +33,11 @@ def draw_window(surface, grid):
     surface.fill(ST.GRID_COL)
     draw_cubes(surface, grid)
     draw_grid(surface)
+    draw_buttons(surface)
     pygame.display.update()
+
+def check_quit():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
 

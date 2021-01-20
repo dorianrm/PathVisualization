@@ -27,3 +27,11 @@ def init():
     VISITED_COLOR = 'Red'
     FRONTIER_COLOR = 'Pink'
     PATH_COLOR = 'Cyan'
+
+    # Button settings
+    global RUN_X, RUN_Y, RUN_WIDTH, RUN_HEIGHT, RUN_COLOR
+    RUN_X = 0
+    RUN_Y = 751
+    RUN_WIDTH = 100
+    RUN_HEIGHT = 50
+    RUN_COLOR = 'Green'

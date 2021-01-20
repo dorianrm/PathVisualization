@@ -22,7 +22,7 @@ def event_check(surface, grid):
             pygame.quit()
         if keys[pygame.K_SPACE] and not path_found:
             print('PRESSED SPACE')
-            alg.BFS(grid, surface) # run algorithm
+            alg.aStar(grid, surface)
             path_found = True
         
         if keys[pygame.K_r]:
@@ -31,42 +31,32 @@ def event_check(surface, grid):
             ST.START_CUBE = None
             ST.END_CUBE = None
 
-        if pygame.mouse.get_pressed()[0]:
-            mouse_pos = pygame.mouse.get_pos()
-            row, col = get_mouse_pos(mouse_pos)
+        mouse_pos = pygame.mouse.get_pos()
+        row, col = get_mouse_pos(mouse_pos)
+        clicked_cube = None
+        if row < ST.ROWS and col < ST.COLS:
             clicked_cube = grid[row][col]
 
+        if pygame.mouse.get_pressed()[0]:
             if ST.START_CUBE == None and clicked_cube != ST.END_CUBE:
                 ST.START_CUBE = clicked_cube
                 ST.START_CUBE.set_start()
             elif ST.END_CUBE == None and clicked_cube != ST.START_CUBE:
                 ST.END_CUBE = clicked_cube
                 ST.END_CUBE.set_end()
-            elif clicked_cube != ST.START_CUBE and clicked_cube != ST.END_CUBE:
+            elif clicked_cube and clicked_cube != ST.START_CUBE and clicked_cube != ST.END_CUBE:
                 clicked_cube.set_wall()
 
         if pygame.mouse.get_pressed()[2]:
-            mouse_pos = pygame.mouse.get_pos()
-            row, col = get_mouse_pos(mouse_pos)
-            clicked_cube = grid[row][col]
             if clicked_cube == ST.START_CUBE:
                 ST.START_CUBE.reset()
                 ST.START_CUBE = None
             elif clicked_cube == ST.END_CUBE:
                 ST.END_CUBE.reset()
                 ST.END_CUBE = None
-            else:
+            elif clicked_cube:
                 clicked_cube.reset()
     return grid
-    
-    # if ST.START_CUBE != None:
-    #     print('START CUBE (ROW,COL): ', ST.START_CUBE.row, ST.START_CUBE.col)
-    # else:
-    #     print('START CUBE ------')
-    # if ST.END_CUBE != None:
-    #     print('END CUBE (ROW,COL): ', ST.END_CUBE .row, ST.END_CUBE .col)
-    # else:
-    #     print('END CUBE ------')
 
 
 def get_mouse_pos(pos):
