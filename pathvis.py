@@ -11,7 +11,6 @@ BFS, A-star, Dijkstra, Kruskal
 '''
 
 def event_check(surface, grid):
-    path_found = False
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
@@ -22,10 +21,9 @@ def event_check(surface, grid):
         if keys[pygame.K_q]:
             pygame.quit()
 
-        if keys[pygame.K_SPACE] and not path_found:
-            print('PRESSED SPACE')
-            alg.aStar(grid, surface)
-            path_found = True
+        # if keys[pygame.K_SPACE] and ST.START_CUBE and ST.END_CUBE:
+        #     print('PRESSED SPACE')
+        #     alg.aStar(grid, surface)
         
         if keys[pygame.K_r]:
             print('RESET')
@@ -41,12 +39,18 @@ def event_check(surface, grid):
             # Set button colors
             ST.RUN_COLOR = ST.RUN_DE_COLOR
             ST.RESET_COLOR = ST.RESET_DE_COLOR
+            ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
+            ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
             if ST.ALG_CHOICE == 'BFS':
                 ST.BFS_COLOR = ST.ALG_SEL_COLOR
                 ST.ASTAR_COLOR = ST.ALG_DE_COLOR
+                ST.BFS_FONT_COLOR = ST.FONT_DE_COLOR
+                ST.ASTAR_FONT_COLOR = ST.FONT_SEL_COLOR
             else:
                 ST.BFS_COLOR = ST.ALG_DE_COLOR
                 ST.ASTAR_COLOR = ST.ALG_SEL_COLOR
+                ST.BFS_FONT_COLOR = ST.FONT_SEL_COLOR
+                ST.ASTAR_FONT_COLOR = ST.FONT_DE_COLOR
 
             clicked_cube = grid[row][col]
 
@@ -74,17 +78,20 @@ def event_check(surface, grid):
             if ST.RUN_BUTTON.collidepoint(mouse_pos):
                 print('HOVERING ON RUN BUTTON')
                 ST.RUN_COLOR = ST.RUN_SEL_COLOR
+                ST.RUN_FONT_COLOR = ST.FONT_SEL_COLOR
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if ST.ALG_CHOICE == 'BFS':
-                        alg.BFS(grid, surface)
-                        path_found = True
+                    if ST.START_CUBE and ST.END_CUBE:
+                        if ST.ALG_CHOICE == 'BFS':
+                            alg.BFS(grid, surface)
+                        else:
+                            alg.aStar(grid, surface)
                     else:
-                        alg.aStar(grid, surface)
-                        path_found = True
+                        print('START AND END NOT SELECTED')
 
             elif ST.RESET_BUTTON.collidepoint(mouse_pos):
                 print('HOVERING ON RESET BUTTON')
                 ST.RESET_COLOR = ST.RESET_SEL_COLOR
+                ST.RESET_FONT_COLOR = ST.FONT_SEL_COLOR
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print('RESET')
                     grid = win.init_grid()
@@ -94,25 +101,34 @@ def event_check(surface, grid):
             elif ST.BFS_BUTTON.collidepoint(mouse_pos):
                 print('HOVERING ON BFS BUTTON')
                 ST.BFS_COLOR = ST.ALG_SEL_COLOR
+                ST.BFS_FONT_COLOR = ST.FONT_DE_COLOR
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print('SELECT BFS ALG')
                     ST.ALG_CHOICE = 'BFS'
+                    ST.ASTAR_COLOR = ST.ALG_DE_COLOR
+                    ST.ASTAR_FONT_COLOR = ST.FONT_SEL_COLOR
 
             elif ST.ASTAR_BUTTON.collidepoint(mouse_pos):
                 print('HOVERING ON ASTAR BUTTON')
                 ST.ASTAR_COLOR = ST.ALG_SEL_COLOR
+                ST.ASTAR_FONT_COLOR = ST.FONT_DE_COLOR
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print('SELECT ASTAR ALG')
                     ST.ALG_CHOICE = 'ASTAR'
-                    
+                    ST.BFS_COLOR = ST.ALG_DE_COLOR
+                    ST.BFS_FONT_COLOR = ST.FONT_SEL_COLOR
             else:
                 print('OFF RUN BUTTON')
                 ST.RUN_COLOR = ST.RUN_DE_COLOR
                 ST.RESET_COLOR = ST.RESET_DE_COLOR
-                if ST.ALG_CHOICE != 'BFS':
-                    ST.BFS_COLOR = ST.ALG_DE_COLOR
-                else:
+                ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
+                ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
+                if ST.ALG_CHOICE == 'BFS':
                     ST.ASTAR_COLOR = ST.ALG_DE_COLOR
+                    ST.ASTAR_FONT_COLOR = ST.FONT_SEL_COLOR
+                else:
+                    ST.BFS_COLOR = ST.ALG_DE_COLOR
+                    ST.BFS_FONT_COLOR = ST.FONT_SEL_COLOR
     # print(ST.ALG_CHOICE)
     # print(ST.RUN_COLOR)
     return grid

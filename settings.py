@@ -32,13 +32,13 @@ def init():
 
     # global button settings
     global RUN_SEL_COLOR, RUN_DE_COLOR, RESET_SEL_COLOR, RESET_DE_COLOR, ALG_CHOICE, ALG_SEL_COLOR, ALG_DE_COLOR
-    RUN_SEL_COLOR = (150,255,150)
+    RUN_SEL_COLOR = (140,255,140)
     RUN_DE_COLOR = (0, 255, 0) # Darker shade, mouse not hovering on
     RESET_SEL_COLOR = (150, 150, 150)
     RESET_DE_COLOR = (100, 100, 100)
     ALG_CHOICE = 'BFS'
-    ALG_SEL_COLOR = (238, 130, 238)
-    ALG_DE_COLOR = (238, 180, 238)
+    ALG_SEL_COLOR = (238, 120, 238) #darker pink
+    ALG_DE_COLOR = (238, 180, 238) #lighter
 
     # Run Button settings
     global RUN_X, RUN_Y, RUN_WIDTH, RUN_HEIGHT, RUN_COLOR, RUN_BUTTON
@@ -46,7 +46,7 @@ def init():
     RUN_Y = 751
     RUN_WIDTH = 200
     RUN_HEIGHT = 50
-    RUN_COLOR = RUN_SEL_COLOR
+    RUN_COLOR = RUN_DE_COLOR
     RUN_BUTTON = pygame.Rect(RUN_X, RUN_Y, RUN_WIDTH, RUN_HEIGHT)
 
 
@@ -55,7 +55,7 @@ def init():
     RESET_Y = 761
     RESET_WIDTH = 100
     RESET_HEIGHT = 30
-    RESET_COLOR = RESET_SEL_COLOR
+    RESET_COLOR = RESET_DE_COLOR
     RESET_BUTTON = pygame.Rect(RESET_X, RESET_Y, RESET_WIDTH, RESET_HEIGHT)
 
     # BFS Buttons settings
@@ -64,7 +64,7 @@ def init():
     BFS_Y = 751
     BFS_WIDTH = 150
     BFS_HEIGHT = 50
-    BFS_COLOR = ALG_SEL_COLOR
+    BFS_COLOR = ALG_DE_COLOR
     BFS_BUTTON = pygame.Rect(BFS_X, BFS_Y, BFS_WIDTH, BFS_HEIGHT)
 
     # Astar Button settings
@@ -73,12 +73,17 @@ def init():
     ASTAR_Y = 751
     ASTAR_WIDTH = 150
     ASTAR_HEIGHT = 50
-    ASTAR_COLOR = ALG_DE_COLOR
+    ASTAR_COLOR = ALG_SEL_COLOR
     ASTAR_BUTTON = pygame.Rect(ASTAR_X, ASTAR_Y, ASTAR_WIDTH, ASTAR_HEIGHT)
 
     # Text settings
-    global RUN_FONT, RESET_FONT, FONT_COLOR
+    global RUN_FONT, RESET_FONT, FONT_SEL_COLOR, FONT_DE_COLOR, RUN_FONT_COLOR, RESET_FONT_COLOR, BFS_FONT_COLOR, ASTAR_FONT_COLOR
     pygame.font.init()
     RUN_FONT = pygame.font.SysFont('Arial', 25)
     RESET_FONT = pygame.font.SysFont('Arial', 15)
-    FONT_COLOR = (0,0,0)
+    FONT_SEL_COLOR = (85, 85, 85)
+    FONT_DE_COLOR = (0,0,0)
+    RUN_FONT_COLOR = FONT_DE_COLOR
+    RESET_FONT_COLOR = FONT_DE_COLOR
+    BFS_FONT_COLOR = FONT_DE_COLOR
+    ASTAR_FONT_COLOR = FONT_DE_COLOR

@@ -42,6 +42,7 @@ G = distance between curr node and start node
 H = heuristic - estiamted distance from curr node to end node
 '''
 def aStar(grid,surface):
+    win.reset_costs(grid)
     open_set = PriorityQueue()
     entry_id = 0 #ID number when added - used for tiebreakers
     open_set.put((ST.START_CUBE.f_cost, entry_id, ST.START_CUBE))
