@@ -10,6 +10,7 @@ def init_grid():
 
 def draw_buttons(surface):
     pygame.draw.rect(surface, ST.RUN_COLOR, ST.RUN_BUTTON)
+    pygame.draw.rect(surface, ST.RESET_COLOR, ST.RESET_BUTTON)
     pygame.draw.rect(surface, ST.BFS_COLOR, ST.BFS_BUTTON)
     pygame.draw.rect(surface, ST.ASTAR_COLOR, ST.ASTAR_BUTTON)
 

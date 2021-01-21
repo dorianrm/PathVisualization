@@ -73,6 +73,15 @@ def event_check(surface, grid):
                         alg.aStar(grid, surface)
                         path_found = True
 
+            elif ST.RESET_BUTTON.collidepoint(mouse_pos):
+                print('HOVERING ON RESET BUTTON')
+                ST.RESET_COLOR = ST.RESET_SEL_COLOR
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print('RESET')
+                    grid = win.init_grid()
+                    ST.START_CUBE = None
+                    ST.END_CUBE = None
+
             elif ST.BFS_BUTTON.collidepoint(mouse_pos):
                 print('HOVERING ON BFS BUTTON')
                 ST.BFS_COLOR = ST.ALG_SEL_COLOR
@@ -90,11 +99,12 @@ def event_check(surface, grid):
             else:
                 print('OFF RUN BUTTON')
                 ST.RUN_COLOR = ST.RUN_DE_COLOR
+                ST.RESET_COLOR = ST.RESET_DE_COLOR
                 if ST.ALG_CHOICE != 'BFS':
                     ST.BFS_COLOR = ST.ALG_DE_COLOR
                 else:
                     ST.ASTAR_COLOR = ST.ALG_DE_COLOR
-    print(ST.ALG_CHOICE)
+    # print(ST.ALG_CHOICE)
     return grid
 
 
