@@ -9,8 +9,9 @@ def init_grid():
     return grid
 
 def draw_buttons(surface):
-    run_button = pygame.Rect(ST.RUN_X, ST.RUN_Y, ST.RUN_WIDTH, ST.RUN_HEIGHT)
-    pygame.draw.rect(surface, ST.RUN_COLOR, run_button)
+    pygame.draw.rect(surface, ST.RUN_COLOR, ST.RUN_BUTTON)
+    pygame.draw.rect(surface, ST.BFS_COLOR, ST.BFS_BUTTON)
+    pygame.draw.rect(surface, ST.ASTAR_COLOR, ST.ASTAR_BUTTON)
 
 def draw_cubes(surface, grid):
     for i in range(ST.ROWS):

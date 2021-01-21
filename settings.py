@@ -1,3 +1,5 @@
+import pygame
+
 # Global vars
 def init():
 
@@ -28,10 +30,37 @@ def init():
     FRONTIER_COLOR = 'Pink'
     PATH_COLOR = 'Cyan'
 
-    # Button settings
-    global RUN_X, RUN_Y, RUN_WIDTH, RUN_HEIGHT, RUN_COLOR
+    # global button settings
+    global RUN_SEL_COLOR, RUN_DE_COLOR, ALG_CHOICE, ALG_SEL_COLOR, ALG_DE_COLOR
+    RUN_SEL_COLOR = (150,255,150)
+    RUN_DE_COLOR = (0, 255, 0)
+    ALG_CHOICE = 'BFS'
+    ALG_SEL_COLOR = (238, 130, 238)
+    ALG_DE_COLOR = (238, 180, 238)
+
+    # Run Button settings
+    global RUN_X, RUN_Y, RUN_WIDTH, RUN_HEIGHT, RUN_COLOR, RUN_BUTTON
     RUN_X = 0
     RUN_Y = 751
-    RUN_WIDTH = 100
+    RUN_WIDTH = 200
     RUN_HEIGHT = 50
     RUN_COLOR = 'Green'
+    RUN_BUTTON = pygame.Rect(RUN_X, RUN_Y, RUN_WIDTH, RUN_HEIGHT)
+
+    # BFS Buttons settings
+    global BFS_X, BFS_Y, BFS_WIDTH, BFS_HEIGHT, BFS_COLOR, BFS_COLOR, BFS_BUTTON
+    BFS_X = (WIDTH//2) - 155
+    BFS_Y = 751
+    BFS_WIDTH = 150
+    BFS_HEIGHT = 50
+    BFS_COLOR = ALG_SEL_COLOR
+    BFS_BUTTON = pygame.Rect(BFS_X, BFS_Y, BFS_WIDTH, BFS_HEIGHT)
+
+    # Astar Button settings
+    global ASTAR_X, ASTAR_Y, ASTAR_WIDTH, ASTAR_HEIGHT, ASTAR_COLOR, ASTAR_BUTTON
+    ASTAR_X = (WIDTH//2) + 5
+    ASTAR_Y = 751
+    ASTAR_WIDTH = 150
+    ASTAR_HEIGHT = 50
+    ASTAR_COLOR = ALG_DE_COLOR
+    ASTAR_BUTTON = pygame.Rect(ASTAR_X, ASTAR_Y, ASTAR_WIDTH, ASTAR_HEIGHT)
