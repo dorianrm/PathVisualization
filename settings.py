@@ -33,9 +33,9 @@ def init():
     # global button settings
     global RUN_SEL_COLOR, RUN_DE_COLOR, RESET_SEL_COLOR, RESET_DE_COLOR, ALG_CHOICE, ALG_SEL_COLOR, ALG_DE_COLOR
     RUN_SEL_COLOR = (150,255,150)
-    RUN_DE_COLOR = (0, 255, 0)
-    RESET_SEL_COLOR = (150, 150, 150) 
-    RESET_DE_COLOR = (100, 100, 100) 
+    RUN_DE_COLOR = (0, 255, 0) # Darker shade, mouse not hovering on
+    RESET_SEL_COLOR = (150, 150, 150)
+    RESET_DE_COLOR = (100, 100, 100)
     ALG_CHOICE = 'BFS'
     ALG_SEL_COLOR = (238, 130, 238)
     ALG_DE_COLOR = (238, 180, 238)
@@ -75,3 +75,10 @@ def init():
     ASTAR_HEIGHT = 50
     ASTAR_COLOR = ALG_DE_COLOR
     ASTAR_BUTTON = pygame.Rect(ASTAR_X, ASTAR_Y, ASTAR_WIDTH, ASTAR_HEIGHT)
+
+    # Text settings
+    global RUN_FONT, RESET_FONT, FONT_COLOR
+    pygame.font.init()
+    RUN_FONT = pygame.font.SysFont('Arial', 25)
+    RESET_FONT = pygame.font.SysFont('Arial', 15)
+    FONT_COLOR = (0,0,0)

@@ -38,7 +38,16 @@ def event_check(surface, grid):
         clicked_cube = None
 
         if row < ST.ROWS and col < ST.COLS: #mouse over grid
-            ST.RUN_COLOR = 'Green'
+            # Set button colors
+            ST.RUN_COLOR = ST.RUN_DE_COLOR
+            ST.RESET_COLOR = ST.RESET_DE_COLOR
+            if ST.ALG_CHOICE == 'BFS':
+                ST.BFS_COLOR = ST.ALG_SEL_COLOR
+                ST.ASTAR_COLOR = ST.ALG_DE_COLOR
+            else:
+                ST.BFS_COLOR = ST.ALG_DE_COLOR
+                ST.ASTAR_COLOR = ST.ALG_SEL_COLOR
+
             clicked_cube = grid[row][col]
 
             if pygame.mouse.get_pressed()[0]:
@@ -105,6 +114,7 @@ def event_check(surface, grid):
                 else:
                     ST.ASTAR_COLOR = ST.ALG_DE_COLOR
     # print(ST.ALG_CHOICE)
+    # print(ST.RUN_COLOR)
     return grid
 
 

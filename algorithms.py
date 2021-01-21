@@ -4,7 +4,6 @@ from collections import deque
 from cube_class import Cube
 from queue import PriorityQueue
 
-
 def BFS(grid, surface):
     visited = set()
     queue = deque([ST.START_CUBE])
@@ -98,5 +97,3 @@ def construct_path(grid, surface):
     for cube in path[::-1]:
         cube.set_path()
         win.draw_window(surface, grid)
-
-    
