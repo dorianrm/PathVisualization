@@ -5,6 +5,7 @@ from cube_class import Cube
 from queue import PriorityQueue
 
 def BFS(grid, surface):
+    win.reset_costs(grid)
     visited = set()
     queue = deque([ST.START_CUBE])
     while queue:

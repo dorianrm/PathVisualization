@@ -30,6 +30,10 @@ def event_check(surface, grid):
             grid = win.init_grid()
             ST.START_CUBE = None
             ST.END_CUBE = None
+        
+        if keys[pygame.K_i]:
+            print('RANDOM')
+            grid = win.generate_random_walls(grid)
 
         mouse_pos = pygame.mouse.get_pos()
         row, col = get_mouse_pos(mouse_pos)
@@ -39,8 +43,12 @@ def event_check(surface, grid):
             # Set button colors
             ST.RUN_COLOR = ST.RUN_DE_COLOR
             ST.RESET_COLOR = ST.RESET_DE_COLOR
+            ST.RAND_COLOR = ST.RAND_DE_COLOR
+            
             ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
             ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
+            ST.RAND_FONT_COLOR = ST.FONT_DE_COLOR
+            #font
             if ST.ALG_CHOICE == 'BFS':
                 ST.BFS_COLOR = ST.ALG_SEL_COLOR
                 ST.ASTAR_COLOR = ST.ALG_DE_COLOR
@@ -117,12 +125,26 @@ def event_check(surface, grid):
                     ST.ALG_CHOICE = 'ASTAR'
                     ST.BFS_COLOR = ST.ALG_DE_COLOR
                     ST.BFS_FONT_COLOR = ST.FONT_SEL_COLOR
+
+            elif ST.RAND_BUTTON.collidepoint(mouse_pos):
+                print('HOVERING ON WALL BUTTON')
+                ST.RAND_COLOR = ST.RAND_SEL_COLOR
+                ST.RAND_FONT_COLOR = ST.FONT_SEL_COLOR
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print('SELECT RANDOM WALLS')
+                    ST.RAND_COLOR = ST.RAND_DE_COLOR
+                    grid = win.generate_random_walls(grid)
+
             else:
                 print('OFF RUN BUTTON')
                 ST.RUN_COLOR = ST.RUN_DE_COLOR
                 ST.RESET_COLOR = ST.RESET_DE_COLOR
+                ST.RAND_COLOR = ST.RAND_DE_COLOR
+
                 ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
                 ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
+                ST.RAND_FONT_COLOR = ST.FONT_DE_COLOR
+                
                 if ST.ALG_CHOICE == 'BFS':
                     ST.ASTAR_COLOR = ST.ALG_DE_COLOR
                     ST.ASTAR_FONT_COLOR = ST.FONT_SEL_COLOR
