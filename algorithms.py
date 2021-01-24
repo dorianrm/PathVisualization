@@ -1,3 +1,4 @@
+import pygame
 import settings as ST
 import window as win
 from collections import deque
@@ -9,6 +10,7 @@ def BFS(grid, surface):
     visited = set()
     queue = deque([ST.START_CUBE])
     while queue:
+        pygame.time.delay(ST.DELAY)
         win.check_quit()
         curr_cube = queue.popleft()
         if curr_cube == ST.END_CUBE:
@@ -51,6 +53,7 @@ def aStar(grid,surface):
     #fcost, entry num, cube
 
     while not open_set.empty():
+        pygame.time.delay(ST.DELAY)
         win.check_quit()
 
         curr_cube = open_set.get()[2] #removes from queue

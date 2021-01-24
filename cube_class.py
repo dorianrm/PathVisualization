@@ -57,14 +57,15 @@ class Cube(object):
 
     def get_neighbors(self):
         neighbors = []
-        if self.row-1 >= 0:
+        if self.row-1 >= 0: #top
             neighbors.append([self.row-1, self.col])
-        if self.row+1 < ST.ROWS:
-            neighbors.append([self.row+1, self.col])
-        if self.col-1 >= 0:
-            neighbors.append([self.row, self.col-1])
-        if self.col+1 < ST.COLS:
+        if self.col+1 < ST.COLS: #right
             neighbors.append([self.row, self.col+1])
+        if self.row+1 < ST.ROWS: #bottom
+            neighbors.append([self.row+1, self.col])
+        if self.col-1 >= 0: #left
+            neighbors.append([self.row, self.col-1])
+
         return neighbors
     
     def reset(self):

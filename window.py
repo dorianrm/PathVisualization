@@ -15,6 +15,9 @@ def draw_buttons(surface):
     pygame.draw.rect(surface, ST.BFS_COLOR, ST.BFS_BUTTON)
     pygame.draw.rect(surface, ST.ASTAR_COLOR, ST.ASTAR_BUTTON)
     pygame.draw.rect(surface, ST.RAND_COLOR, ST.RAND_BUTTON)
+    pygame.draw.rect(surface, ST.SBOX_COLOR, ST.SBOX_BOX)
+    pygame.draw.rect(surface, ST.SR_COLOR, ST.S_RIGHT)
+    pygame.draw.rect(surface, ST.SL_COLOR, ST.S_LEFT)
 
 def draw_text(surface):
     # render(text, antialias, color, background=None)
@@ -47,6 +50,30 @@ def draw_text(surface):
     rand_x = (ST.RAND_X + (ST.RAND_WIDTH//2)) - (rand_width//2)
     rand_y = (ST.RAND_Y + (ST.RAND_HEIGHT//2)) - (rand_height//2)
     surface.blit(rand_text, (rand_x, rand_y))
+
+    s_width, s_height = ST.SPEED_FONT.size('Speed')
+    s_text = ST.SPEED_FONT.render('Speed', True, ST.SPEED_FONT_COLOR)
+    s_x = (ST.SBOX_X - 50) - (s_width//2)
+    s_y = (ST.SBOX_Y + (ST.SBOX_HEIGHT//2)) - (s_height//2)
+    surface.blit(s_text, (s_x, s_y))
+
+    sp_width, sp_height = ST.SPEED_FONT.size(str(ST.SPEED))
+    sp_text = ST.SPEED_FONT.render(str(ST.SPEED), True, ST.SPEED_FONT_COLOR)
+    sp_x = (ST.SBOX_X + (ST.SBOX_WIDTH//2)) - (sp_width//2)
+    sp_y = (ST.SBOX_Y + (ST.SBOX_HEIGHT//2)) - (sp_height//2)
+    surface.blit(sp_text, (sp_x, sp_y))
+
+    sl_width, sl_height = ST.SC_FONT.size('-')
+    sl_text = ST.SC_FONT.render('-', True, ST.SL_FONT_COLOR)
+    sl_x = (ST.SL_X + (ST.SR_WIDTH//2)) - (sl_width//2)
+    sl_y = (ST.SR_Y + (ST.SR_HEIGHT//2)) - (sl_height//2)
+    surface.blit(sl_text, (sl_x, sl_y))
+
+    sr_width, sr_height = ST.SC_FONT.size('+')
+    sr_text = ST.SC_FONT.render('+', True, ST.SR_FONT_COLOR)
+    sr_x = (ST.SR_X + (ST.SR_WIDTH//2)) - (sr_width//2)
+    sr_y = (ST.SR_Y + (ST.SR_HEIGHT//2)) - (sr_height//2)
+    surface.blit(sr_text, (sr_x, sr_y))
 
 def draw_cubes(surface, grid):
     for i in range(ST.ROWS):

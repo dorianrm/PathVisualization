@@ -15,25 +15,6 @@ def event_check(surface, grid):
 
         if event.type == pygame.QUIT:
             pygame.quit()
-        
-        keys = pygame.key.get_pressed()
-        # for key in keys:
-        if keys[pygame.K_q]:
-            pygame.quit()
-
-        # if keys[pygame.K_SPACE] and ST.START_CUBE and ST.END_CUBE:
-        #     print('PRESSED SPACE')
-        #     alg.aStar(grid, surface)
-        
-        if keys[pygame.K_r]:
-            print('RESET')
-            grid = win.init_grid()
-            ST.START_CUBE = None
-            ST.END_CUBE = None
-        
-        if keys[pygame.K_i]:
-            print('RANDOM')
-            grid = win.generate_random_walls(grid)
 
         mouse_pos = pygame.mouse.get_pos()
         row, col = get_mouse_pos(mouse_pos)
@@ -44,11 +25,15 @@ def event_check(surface, grid):
             ST.RUN_COLOR = ST.RUN_DE_COLOR
             ST.RESET_COLOR = ST.RESET_DE_COLOR
             ST.RAND_COLOR = ST.RAND_DE_COLOR
+            ST.SL_COLOR = ST.SPEED_DE_COLOR
+            ST.SR_COLOR = ST.SPEED_DE_COLOR
             
             ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
             ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
             ST.RAND_FONT_COLOR = ST.FONT_DE_COLOR
-            #font
+            ST.SL_FONT_COLOR = ST.FONT_DE_COLOR
+            ST.SR_FONT_COLOR = ST.FONT_DE_COLOR
+
             if ST.ALG_CHOICE == 'BFS':
                 ST.BFS_COLOR = ST.ALG_SEL_COLOR
                 ST.ASTAR_COLOR = ST.ALG_DE_COLOR
@@ -88,6 +73,8 @@ def event_check(surface, grid):
                 ST.RUN_COLOR = ST.RUN_SEL_COLOR
                 ST.RUN_FONT_COLOR = ST.FONT_SEL_COLOR
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    ST.RUN_COLOR = ST.RUN_DE_COLOR
+                    ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
                     if ST.START_CUBE and ST.END_CUBE:
                         if ST.ALG_CHOICE == 'BFS':
                             alg.BFS(grid, surface)
@@ -102,6 +89,8 @@ def event_check(surface, grid):
                 ST.RESET_FONT_COLOR = ST.FONT_SEL_COLOR
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print('RESET')
+                    ST.RESET_COLOR = ST.RESET_DE_COLOR
+                    ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
                     grid = win.init_grid()
                     ST.START_CUBE = None
                     ST.END_CUBE = None
@@ -133,17 +122,46 @@ def event_check(surface, grid):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print('SELECT RANDOM WALLS')
                     ST.RAND_COLOR = ST.RAND_DE_COLOR
+                    ST.RAND_FONT_COLOR = ST.FONT_DE_COLOR
                     grid = win.generate_random_walls(grid)
+            
+            elif ST.S_LEFT.collidepoint(mouse_pos):
+                print('SPEED LEFT')
+                ST.SL_COLOR = ST.SPEED_SEL_COLOR
+                ST.SL_FONT_COLOR = ST.FONT_SEL_COLOR
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print('select left increase')
+                    ST.SL_COLOR = ST.SPEED_DE_COLOR
+                    ST.SL_FONT_COLOR = ST.FONT_DE_COLOR
+                    if ST.SPEED > 1:
+                        ST.SPEED -= 1
+                        ST.DELAY = 500 - (ST.SPEED * ST.SPEED_FACTOR)
+
+            elif ST.S_RIGHT.collidepoint(mouse_pos):
+                print('SPEED RIGHT')
+                ST.SR_COLOR = ST.SPEED_SEL_COLOR
+                ST.SR_FONT_COLOR = ST.FONT_SEL_COLOR
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print('select right increase')
+                    ST.SR_COLOR = ST.SPEED_DE_COLOR
+                    ST.SR_FONT_COLOR = ST.FONT_DE_COLOR
+                    if ST.SPEED < 10:
+                        ST.SPEED += 1
+                        ST.DELAY = 500 - (ST.SPEED * ST.SPEED_FACTOR)
 
             else:
                 print('OFF RUN BUTTON')
                 ST.RUN_COLOR = ST.RUN_DE_COLOR
                 ST.RESET_COLOR = ST.RESET_DE_COLOR
                 ST.RAND_COLOR = ST.RAND_DE_COLOR
+                ST.SL_COLOR = ST.SPEED_DE_COLOR
+                ST.SR_COLOR = ST.SPEED_DE_COLOR
 
                 ST.RUN_FONT_COLOR = ST.FONT_DE_COLOR
                 ST.RESET_FONT_COLOR = ST.FONT_DE_COLOR
                 ST.RAND_FONT_COLOR = ST.FONT_DE_COLOR
+                ST.SL_FONT_COLOR = ST.FONT_DE_COLOR
+                ST.SR_FONT_COLOR = ST.FONT_DE_COLOR
                 
                 if ST.ALG_CHOICE == 'BFS':
                     ST.ASTAR_COLOR = ST.ALG_DE_COLOR
@@ -151,8 +169,6 @@ def event_check(surface, grid):
                 else:
                     ST.BFS_COLOR = ST.ALG_DE_COLOR
                     ST.BFS_FONT_COLOR = ST.FONT_SEL_COLOR
-    # print(ST.ALG_CHOICE)
-    # print(ST.RUN_COLOR)
     return grid
 
 
