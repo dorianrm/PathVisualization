@@ -18,7 +18,7 @@ def event_check(surface, grid):
 
         mouse_pos = pygame.mouse.get_pos()
         row, col = get_mouse_pos(mouse_pos)
-        clicked_cube = None
+
 
         if row < ST.ROWS and col < ST.COLS: #mouse over grid
             # Set button colors
